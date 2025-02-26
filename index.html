@@ -14,13 +14,13 @@
 <body>
     <h1>🚴🏼‍♀️ Bikewatching</h1>
     <header>
-    <div class="slider-container">
-            <label for="time-slider">Filter by time:</label>
-            <input id="time-slider" type="range" min="-1" max="1440" value="-1" step="1">
-            <div class="time-display">
-                <time id="selected-time"></time>
-                <em id="any-time">(any time)</em>
-            </div>
+        <div id="tooltip"></div>
+        <div class="slider-container">
+        <label>
+            Time: <span id="selected-time"></span>
+            <span id="any-time">Any Time</span>
+            <input type="range" id="time-slider" min="-1" max="1439" value="-1">
+        </label>
         </div>
     </header>
     

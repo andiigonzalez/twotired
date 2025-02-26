@@ -7,6 +7,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYW5nMDI1IiwiYSI6ImNtN2w4cGFzODA5OHEycm9veDMya
 let departuresByMinute = Array.from({ length: 1440 }, () => []);
 let arrivalsByMinute = Array.from({ length: 1440 }, () => []);
 let stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
+let filteredStations = [];
+const tooltip = d3.select('#tooltip');
 
 // Initialize the map
 const map = new mapboxgl.Map({

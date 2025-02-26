@@ -39,7 +39,6 @@ function computeStationTraffic(stations, timeFilter = -1) {
     );  
     
     return stations.map(station => ({
-        ...station,
         arrivals: arrivals.get(station.short_name) ?? 0,
         departures: departures.get(station.short_name) ?? 0,
         totalTraffic: (arrivals.get(station.short_name) ?? 0) + (departures.get(station.short_name) ?? 0),
@@ -130,7 +129,7 @@ map.on('load', async () => {
             .range([0, 25]);
 
         const circles = svg.selectAll('circle')
-            .data(stations)
+            .data(stations, (d) => d.short_name)
             .enter()
             .append('circle')
             .attr('r', d => radiusScale(d.totalTraffic)) // Use scale to size markers

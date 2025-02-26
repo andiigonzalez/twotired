@@ -36,13 +36,12 @@ function computeStationTraffic(stations, timeFilter = -1) {
         (d) => d.end_station_id
     );  
     
-    return stations.map((station) => {
-        let id = station.short_name;
-        station.arrivals = arrivals.get(id) ?? 0;
-        station.departures = departures.get(id) ?? 0;
-        station.totalTraffic = station.arrivals + station.departures;
-        return station;
-      });
+    return stations.map(station => ({
+        ...station,
+        arrivals: arrivals.get(station.short_name) ?? 0,
+        departures: departures.get(station.short_name) ?? 0,
+        totalTraffic: (arrivals.get(station.short_name) ?? 0) + (departures.get(station.short_name) ?? 0),
+    }));
 }
 
 map.on('load', async () => {

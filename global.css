@@ -28,19 +28,14 @@ label {
     margin: 10px 10px;
 }
 
-.slider-container {
-    display: flex;
-    flex-direction: row;
-    align-items: left;
-    position: relative;
-}
 
 time, em {
     position: relative;
     right: 10px;
     display: flex:
 }
-time{
+    
+time {
     position: absolute;
     right: 0; 
     top: 25px; 

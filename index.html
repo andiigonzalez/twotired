@@ -16,11 +16,11 @@
     <header>
         <div id="tooltip"></div>
         <div class="slider-container">
-        <label>
-            Time: <span id="selected-time"></span>
-            <span id="any-time">Any Time</span>
-            <input type="range" id="time-slider" min="-1" max="1439" value="-1">
+       <label for="time-slider">Filter by time:
+           <input type="range" id="time-slider" min="-1" max="1439" value="-1" step ="1">
+           <time id="selected-time"></time>
         </label>
+            <span id="any-time">Any Time</span>
         </div>
     </header>
     

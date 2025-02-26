@@ -1,0 +1,74 @@
+body {
+    font: 100%/1.5 system-ui, sans-serif;
+    display: flex;
+    flex-flow: column;
+    max-width: 80em;
+    min-height: 100vh;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 1em;
+}
+
+header {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    padding: 10px;
+    display: flex;
+    align-items: baseline; 
+    gap: 1em;
+}
+
+label {
+    margin-left: auto;
+}
+
+time, em {
+    position: absolute;
+    right: 10px;
+    display: block;
+}
+
+em {
+    font-size: 14px;
+    color: gray;
+    font-style: italic;
+    top: 35px;
+}
+
+time {
+    font-weight: bold;
+}
+
+.legend {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; 
+    margin-block: 10px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.legend div {
+    flex: 1;
+    text-align: center;
+    padding: 5px 10px;
+    font-weight: bold;
+    color: white;
+    font-size: 0.9em;
+}
+
+.legend .departures {
+    background: steelblue;
+    text-align: left;
+}
+
+.legend .balanced {
+    background: #b857a3; 
+    text-align: center;
+}
+
+.legend .arrivals {
+    background: darkorange;
+    text-align: right;
+}

@@ -48,9 +48,6 @@ em {
     top: 35px;
 }
 
-time {
-    font-weight: bold;
-}
 
 .legend {
     display: flex;
@@ -72,8 +69,8 @@ time {
 }
 
 .legend-swatch {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     border: 1px solid white;
     background: var(--color);

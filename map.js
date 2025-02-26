@@ -1,15 +1,12 @@
---------------------------------------------------------------------------------
-                                  // STEP 1 //
---------------------------------------------------------------------------------
+
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 console.log("Mapbox GL JS Loaded:", mapboxgl);
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW5nMDI1IiwiYSI6ImNtN2w4cGFzODA5OHEycm9veDMyanc3YzEifQ.f3a-lq-cHrp7AJ97YhzrPw';
 
-let timeFilter = -1;
-const timeSlider = document.getElementById('#time-slider');
-const selectedTime = document.getElementById('#selected-time');
-const anyTimeLabel = document.getElementById('#any-time');
 
+let departuresByMinute = Array.from({ length: 1440 }, () => []);
+let arrivalsByMinute = Array.from({ length: 1440 }, () => []);
+let stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
 
 // Initialize the map
 const map = new mapboxgl.Map({
@@ -202,20 +199,25 @@ map.on('load', async () => {
             return station; 
             });
         }
-         function filterTripsbyTime(trips, timeFilter) {
-            if (!trips.length) return; // Ensure data is loaded
-                filteredTrips = timeFilter === -1 ? trips : trips.filter(trip => {
-                    if (!trip.started_at || !trip.ended_at) return false; 
-                    const startedMinutes = minutesSinceMidnight(trip.started_at);
-                    const endedMinutes = minutesSinceMidnight(trip.ended_at);
-                    
-                    return (
-                        (startedMinutes !== null && Math.abs(startedMinutes - timeFilter) <= 60) ||
-                        (endedMinutes !== null && Math.abs(endedMinutes - timeFilter) <= 60)
-                    );
-                });
-         
-         }
+      
+      function filterByMinute(tripsByMinute, minute) {
+            if (minute === -1) {
+              return tripsByMinute.flat(); // No filtering, return all trips
+            }
+          
+            // Normalize both min and max minutes to the valid range [0, 1439]
+            let minMinute = (minute - 60 + 1440) % 1440;
+            let maxMinute = (minute + 60) % 1440;
+          
+            // Handle time filtering across midnight
+            if (minMinute > maxMinute) {
+              let beforeMidnight = tripsByMinute.slice(minMinute);
+              let afterMidnight = tripsByMinute.slice(0, maxMinute);
+              return beforeMidnight.concat(afterMidnight).flat();
+            } else {
+              return tripsByMinute.slice(minMinute, maxMinute).flat();
+            }
+        }
          
          } catch (error) {
         console.error('Error loading JSON:', error); 

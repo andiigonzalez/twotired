@@ -36,15 +36,11 @@ function computeStationTraffic(stations, timeFilter = -1) {
         (d) => d.end_station_id
     );  
     
-    // Update each station with filtered counts
     return stations.map((station) => {
         let id = station.short_name;
         station.arrivals = arrivals.get(id) ?? 0;
         station.departures = departures.get(id) ?? 0;
         station.totalTraffic = station.arrivals + station.departures;
-        if (station.totalTraffic === 0) {
-            station.totalTraffic = null
-        }
         return station;
       });
 }
@@ -177,28 +173,6 @@ map.on('load', async () => {
                 .select("title")
                 .text((d) => `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`); // Update text
         }
-
-        function computeStationTraffic(stations, timeFilter = -1) {
-            const departures = d3.rollup(
-              filterByMinute(departuresByMinute, timeFilter), 
-              (v) => v.length,
-              (d) => d.start_station_id
-            );
-          
-            const arrivals = d3.rollup(
-              filterByMinute(arrivalsByMinute, timeFilter), 
-              (v) => v.length,
-              (d) => d.end_station_id
-            );  
-        
-            stations = stations.map(station => {
-            let id = station.short_name;
-            station.arrivals = arrivals.get(id) ?? 0;
-            station.departures = departures.get(id) ?? 0;
-            station.totalTraffic = station.arrivals + station.departures;
-            return station; 
-            });
-        }
       
       function filterByMinute(tripsByMinute, minute) {
             if (minute === -1) {
@@ -217,7 +191,7 @@ map.on('load', async () => {
             } else {
               return tripsByMinute.slice(minMinute, maxMinute).flat();
             }
-        }
+      }
          
          } catch (error) {
         console.error('Error loading JSON:', error); 

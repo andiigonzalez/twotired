@@ -40,6 +40,13 @@ time, em {
     right: 10px;
     display: flex:
 }
+time{
+    position: absolute;
+    right: 0; 
+    top: 25px; 
+    text-align: right;
+    white-space: nowrap; 
+}
 
 em {
     font-size: 14px;

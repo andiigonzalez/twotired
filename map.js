@@ -35,7 +35,7 @@ map.on('load', async () => {
         id: 'bike-lanes',
         type: 'line',
         source: 'boston_route',
-        paint: bikeLaneStyle
+        paint: BikeLanesColors
     });
 
     map.addSource('cambridge_route', {
@@ -47,7 +47,7 @@ map.on('load', async () => {
         id: 'bike-lanes-c',
         type: 'line',
         source: 'cambridge_route',
-        paint: bikeLaneStyle
+        paint:BikeLanesColors
     });
 
 

@@ -11,6 +11,37 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
 </head>
 <body>
-  <h1>🚴🏼‍♀️ Bikewatching</h1>
+    <h1>🚴🏼‍♀️ Bikewatching</h1>
+    <!-- <p>Immersive and interactive map visualization of bike traffic in the Boston area during different times of the day</p> -->
+
+    <!-- Slider for filtering by time -->
+    <header>
+        <label for="time-slider">Filter by time:
+            <input type="range" id="time-slider" min="-1" max="1440" value = "-1">
+            <time id="selected-time"></time>
+        </label>
+            <em id="any-time">(any time)</em>
+    </header>
+    
+
+    <!-- Mapbox GL JS JavaScript -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+   
+    <!-- Load D3.js from CDN -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- Load your custom map initialization script -->
+    <script type="module" src="map.js"></script>
+
+    <div id="map">
+        <svg></svg>
+    </div>
+
+    <div class="legend">
+        <div class="departures" style="--departure-ratio: 1">More departures</div>
+        <div class="balanced" style="--departure-ratio: 0.5">Balanced</div>
+        <div class="arrivals" style="--departure-ratio: 0">More arrivals</div>
+    </div>
+
 </body>
 </html>

@@ -88,18 +88,20 @@ map.on('load', async () => {
         const svg = d3.select('#map').select('svg');
         filteredStations = stations; 
 
+        const radiusScale = d3
+            .scaleSqrt()
+            .domain([0, d3.max(stations, d => d.totalTraffic)])
+            .range([0, 25]);
+
 
         const circles = svg
             .selectAll('circle')
             .data(stations, (d) => d.short_name)
             .enter()
             .append('circle')
-            .attr('r', d => radiusScale(d.totalTraffic)) // Use scale to size markers
-            .attr('fill', 'steelblue')
-            .attr('stroke', 'white')
-            .attr('stroke-width', 1)
             .append('title')
-            .text(d => `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
+            .text(d => `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`)
+            .style("--departure-ratio", d => stationFlow(d.departures / d.totalTraffic));
 
         
         svg.selectAll('circle')
@@ -129,10 +131,6 @@ map.on('load', async () => {
         map.on('resize', updatePositions);
         map.on('moveend', updatePositions);
 
-        const radiusScale = d3
-            .scaleSqrt()
-            .domain([0, d3.max(stations, d => d.totalTraffic)])
-            .range([0, 25]);
 
         const timeSlider = document.getElementById('time-slider');
         const selectedTime = document.getElementById('selected-time');
@@ -154,16 +152,17 @@ map.on('load', async () => {
         
         function updateScatterPlot(timeFilter) {
             const filteredStations = computeStationTraffic(stations, timeFilter);
-
-            timeFilter === -1 ? radiusScale.range([0, 25]) : radiusScale.range([3, 50]);
+            if (timeFilter === -1) {
+                radiusScale.range([0, 25]);
+            } else {
+                radiusScale.range([3, 50]);
+            }
 
 
             circles
                 .data(filteredStations, (d) => d.short_name)
                 .join('circle')
                 .attr('r', (d) => radiusScale(d.totalTraffic))
-                .attr('cx', d => getCoords(d).cx)
-                .attr('cy', d => getCoords(d).cy)
                 .style('--departure-ratio', (d) =>
                     stationFlow(d.departures / d.totalTraffic),
                 )
@@ -185,7 +184,8 @@ map.on('load', async () => {
                 (d) => d.end_station_id
             );  
             
-            return stations.map(station => {
+            return stations.map(station => ({
+                ...station,
                 arrivals: arrivals.get(station.short_name) ?? 0,
                 departures: departures.get(station.short_name) ?? 0,
                 totalTraffic: (arrivals.get(station.short_name) ?? 0) + (departures.get(station.short_name) ?? 0),

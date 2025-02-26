@@ -48,29 +48,12 @@ time {
     padding: 8px;
     border-radius: 5px;
 }
-
-.legend div {
-    flex: 1;
-    text-align: center;
-    padding: 5px 10px;
+.legend-item{
     font-weight: bold;
-    color: white;
-    font-size: 0.9em;
-}
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-.legend .departures {
-    background: steelblue;
-    text-align: left;
-}
-
-.legend .balanced {
-    background: #b857a3; 
-    text-align: center;
-}
-
-.legend .arrivals {
-    background: darkorange;
-    text-align: right;
 }
 .legend-swatch {
     width: 18px;

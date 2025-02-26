@@ -1,3 +1,4 @@
+
 body {
     font: 100%/1.5 system-ui, sans-serif;
     display: flex;
@@ -30,13 +31,13 @@ time, em {
     position: absolute;
     right: 10px;
     display: block;
-    top: 35px;
+    top: 25px;
 }
 .slider-container {
     display: flex;
     position: relative;
     top: 10px; 
-    left: 150px; /* Moved more to the left */
+    right: 30px;
     flex-direction: row;
     align-items: center;
 }
@@ -88,6 +89,12 @@ em {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    border: 1px solid black;  /* Ensure visibility */
-    background-color: var(--color, gray); /* Fallback color */
+    border: 1px solid white;
+    background: var(--color);
+    
+    --color: color-mix(
+        in oklch,
+        var(--color-departures) calc(100% * var(--departure-ratio)),
+        var(--color-arrivals)
+    );
 }

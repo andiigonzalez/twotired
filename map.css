@@ -1,3 +1,8 @@
+:root {
+    --color-departures: steelblue;
+    --color-arrivals: darkorange;
+}
+
 html, body {
     margin: 0;
     padding: 5;
@@ -26,31 +31,16 @@ html, body {
     pointer-events: none;
   }
 
-#map svg circle {
-    pointer-events: auto;
-    fill: var(--color);
+#map circle {
+    fill: steelblue;
     fill-opacity: 0.6;
     stroke: white;
     stroke-width: 1;
-    
+    pointer-events: auto;
     --color: color-mix(
-    in oklch,
-    var(--color-departures) calc(100% * var(--departure-ratio)),
-    var(--color-arrivals)
+        in oklch,
+        var(--color-departures) calc(100% * var(--departure-ratio)),
+        var(--color-arrivals)
     );
 }
 
-#tooltip {
-    position: absolute;
-    background: transparent;
-    color: rgb(66, 76, 82);
-    backdrop-filter: blur(8px);
-    padding: 5px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
-    font-size: 14px;
-    visibility: hidden;
-    pointer-events: none;
-    white-space: nowrap;
-    z-index: 9999; /* Bring tooltip to the very front */
-}

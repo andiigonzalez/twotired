@@ -99,9 +99,16 @@ map.on('load', async () => {
             .data(stations, (d) => d.short_name)
             .enter()
             .append('circle')
-            .append('title')
-            .text(d => `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`)
-            .style("--departure-ratio", d => stationFlow(d.departures / d.totalTraffic));
+            .attr('r', d => radiusScale(d.totalTraffic))
+            .attr('fill', 'steelblue')
+            .attr('stroke', 'white')
+            .attr('stroke-width', 1)
+            .style("--departure-ratio", d => stationFlow(d.departures / d.totalTraffic))
+            .each(function(d) {
+                d3.select(this).append("title").text(
+                    `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`
+                );
+            });
 
         
         svg.selectAll('circle')
@@ -159,16 +166,15 @@ map.on('load', async () => {
             }
 
 
-            circles
+            svg.selectAll('circle')
                 .data(filteredStations, (d) => d.short_name)
-                .join('circle')
-                .attr('r', (d) => radiusScale(d.totalTraffic))
-                .style('--departure-ratio', (d) =>
-                    stationFlow(d.departures / d.totalTraffic),
-                )
-                .select("title")
-                .text((d) => `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
+                .join(enter => enter.append('circle')
+                .attr('r', d => radiusScale(d.totalTraffic)),
+                      update => update.attr('r', d => radiusScale(d.totalTraffic)),
+                      exit => exit.remove()
+                     );
         }
+        
         timeSlider.addEventListener('input', updateTimeDisplay);
         updateTimeDisplay();
 

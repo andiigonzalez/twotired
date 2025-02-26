@@ -42,17 +42,7 @@ html, body {
     fill: var(--color);
 }
 
-#time-slider {
-    width: 300px;
-    margin: 0 10px;
-}
 
-.slider-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    position: relative;
-}
 
 #tooltip {
     position: absolute;

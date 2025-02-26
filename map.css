@@ -26,22 +26,18 @@ html, body {
     pointer-events: none;
   }
 
-#map circle {
-    fill: steelblue;
+#map svg circle {
+    pointer-events: auto;
+    fill: var(--color);
     fill-opacity: 0.6;
     stroke: white;
     stroke-width: 1;
-    pointer-events: auto;
-    fill: green;
-
-    --color-departures: steelblue;
-    --color-arrivals: darkorange;
+    
     --color: color-mix(
     in oklch,
     var(--color-departures) calc(100% * var(--departure-ratio)),
     var(--color-arrivals)
     );
-    fill: var(--color);
 }
 
 
@@ -59,41 +55,4 @@ html, body {
     pointer-events: none;
     white-space: nowrap;
     z-index: 9999; /* Bring tooltip to the very front */
-}
-.legend {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    gap: 20px;
-    padding: 8px 15px;
-    width: 100%;
-    margin-top: 10px;
-    backdrop-filter: blur(12px);
-    padding: 8px 0;
-    font-size: 14px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    bottom: 10px;
-    z-index: 10;
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    font-weight:bold;
-    gap: 8px;
-    font-size: 18px;
-}
-
-.legend-swatch {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 1px solid white;
-    background: var(--color);
-    
-    --color: color-mix(
-        in oklch,
-        var(--color-departures) calc(100% * var(--departure-ratio)),
-        var(--color-arrivals)
-    );
 }

@@ -189,8 +189,7 @@ map.on('load', async () => {
                 arrivals: arrivals.get(station.short_name) ?? 0,
                 departures: departures.get(station.short_name) ?? 0,
                 totalTraffic: (arrivals.get(station.short_name) ?? 0) + (departures.get(station.short_name) ?? 0),
-                return station;
-            });
+            }));
         }
         function filterByMinute(tripsByMinute, minute) {
             if (minute === -1) {

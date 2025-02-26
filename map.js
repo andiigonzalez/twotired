@@ -1,7 +1,8 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
+console.log("Mapbox GL JS Loaded:", mapboxgl);
 // Set your Mapbox access token here
-mapboxgl.accessToken = 'pk.eyJ1IjoicmVlbWFzMDMiLCJhIjoiY203ZGtjYTIwMDN5ejJtcTN0YXB0d2dqNiJ9.jE6KY57HvSYGqgyvxQeGPQ';
+mapboxgl.accessToken = 'pk.eyJ1IjoiYW5nMDI1IiwiYSI6ImNtN2w4cGFzODA5OHEycm9veDMyanc3YzEifQ.f3a-lq-cHrp7AJ97YhzrPw';
 
 let departuresByMinute = Array.from({ length: 1440 }, () => []);
 let arrivalsByMinute = Array.from({ length: 1440 }, () => []);

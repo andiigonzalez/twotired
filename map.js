@@ -72,7 +72,7 @@ map.on('load', async () => {
         const jsonData = await d3.json('https://dsc106.com/labs/lab07/data/bluebikes-stations.json');
         console.log('Loaded JSON Data:', jsonData);  // Log to verify structure
         
-        console.log('Stations Array:', stations);
+        console.log('Stations Data Loaded:', jsonData.data.stations);
         let trips = await d3.csv(
             'https://dsc106.com/labs/lab07/data/bluebikes-traffic-2024-03.csv',
             (trip) => {
@@ -86,7 +86,7 @@ map.on('load', async () => {
             return trip;
             },
         );
-        const stations = computeStationTraffic(jsonData.data.stations, trips);    
+        const stations = computeStationTraffic(jsonData.data.stations);   
         const svg = d3.select('#map').select('svg');
 
         const circles = svg.selectAll('circle')
@@ -127,13 +127,6 @@ map.on('load', async () => {
             .domain([0, d3.max(stations, d => d.totalTraffic)])
             .range([0, 25]);
 
-         stations = stations.map(station => {
-            let id = station.short_name;
-            station.arrivals = arrivals.get(id) ?? 0;
-            station.departures = departures.get(id) ?? 0;
-            station.totalTraffic = station.arrivals + station.departures;
-            return station; });
-        
         const timeSlider = document.getElementById('time-slider');
         const selectedTime = document.getElementById('selected-time');
         const anyTimeLabel = document.getElementById('any-time');

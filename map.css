@@ -42,6 +42,23 @@ html, body {
     fill: var(--color);
 }
 
+#time-slider {
+    width: 300px;
+    margin: 0 10px;
+}
+
+#selected-time {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
+
 #tooltip {
     position: absolute;
     background: transparent;

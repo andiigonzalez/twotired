@@ -23,6 +23,18 @@ label {
     margin-left: auto;
 }
 
+#time-slider {
+    width: 300px;
+    margin: 10px 10px;
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    position: relative;
+}
+
 time, em {
     position: relative;
     right: 10px;

@@ -47,11 +47,6 @@ html, body {
     margin: 0 10px;
 }
 
-#selected-time {
-    display: inline-block;
-    font-weight: bold;
-}
-
 .slider-container {
     display: flex;
     flex-direction: row;

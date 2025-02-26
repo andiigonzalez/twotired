@@ -20,7 +20,7 @@ const map = new mapboxgl.Map({
 });
 
 map.on('load', async () => {
-    const bikeLaneStyle = {
+    const BikeLanesColors = {
         'line-color': '#32D400',
         'line-width': 5,
         'line-opacity': 0.6

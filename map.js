@@ -175,10 +175,9 @@ map.on('load', async () => {
       
       function filterByMinute(tripsByMinute, minute) {
             if (minute === -1) {
-              return tripsByMinute.flat(); // No filtering, return all trips
+              return tripsByMinute.flat(); 
             }
           
-            // Normalize both min and max minutes to the valid range [0, 1439]
             let minMinute = (minute - 60 + 1440) % 1440;
             let maxMinute = (minute + 60) % 1440;
           
